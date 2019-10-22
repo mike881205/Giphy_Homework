@@ -35,16 +35,13 @@ $("#add-band").on("click", function(event) {
     bands.push(band);
 
     renderButtons();
-    
 });
 
 // Display list of bands
 renderButtons();
 
 // Function to retrieve and add gifs to the page
-$(document).on("click", ".band", function(){
-  
-  console.log("hello")
+$(".band").on("click", function(){
 
   let bandData = $(this).attr("data-band");
 
