@@ -1,6 +1,7 @@
 // Initial array of bands
 let bands = ["Every Time I Die", "Deftones", "Queens of the Stone Age", "New Found Glory"];
-  
+
+
 // Function for displaying band data
 function renderButtons() {
 
@@ -44,11 +45,7 @@ renderButtons();
 // Function to retrieve and add gifs to the page
 $(document).on("click", ".band", function(){
   
-  console.log("hello")
-
   let bandData = $(this).attr("data-band");
-
-  console.log(bandData)
 
   // Giphy API URL
   let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + bandData + "&api_key=QZjqyqYS53kHPK9RXWncTF1pJXjuBPsy&limit=10"
@@ -57,14 +54,18 @@ $(document).on("click", ".band", function(){
       url: queryURL,
       method: "GET"
     }).then(function(response) {
+
       
       console.log(response);
       
       let results = response.data
 
+      console.log(results)
+
       for (var i = 0; i < results.length; i++) {
 
         if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+
           // Creating a div for the gif
           let gifDiv = $("<div>");
 
@@ -75,35 +76,39 @@ $(document).on("click", ".band", function(){
           let p = $("<p>").text("Rating: " + rating);
 
           // Creating an image tag
-          let bandImage = $("<img>");
 
-          // Giving the image tag an src attribute of a proprty pulled off the result item
-          bandImage.attr("src", results[i].images.fixed_height.url);
-          bandImage.attr("data-state", "animate")
+         let stillUrl = results[i].images.fixed_height_still.url
+
+         let animateUrl = results[i].images.fixed_height.url
+
+          let stillBandImage = $("<img>").addClass("bandImage").attr("src", stillUrl).attr("data-state", "still").attr("data-still", stillUrl).attr("data-animate", animateUrl);
+
+          //
+
 
           // Appending the paragraph and bandImage to the "gifDiv" div
           gifDiv.append(p);
-          gifDiv.append(bandImage);
+          gifDiv.append(stillBandImage);
 
           // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
           $("#gifs-appear-here").prepend(gifDiv);
+
         }
       }
     });
 })
 
 // Function to pause/unpause gifs
-$(".gif").on("click", function() {
-  // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-  var state = $(this).attr("data-state");
-  // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-  // Then, set the image's data-state to animate
-  // Else set src to the data-still value
-  if (state === "still") {
-    $(this).attr("src", $(this).attr("data-animate"));
-    $(this).attr("data-state", "animate");
-  } else {
-    $(this).attr("src", $(this).attr("data-still"));
-    $(this).attr("data-state", "still");
-  }
+$(document).on("click", ".bandImage", function() {
+
+    var state = $(this).attr("data-state"); 
+
+    if (state === "still") {
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
+    } else {
+      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("data-state", "still");
+    }
+
 });
