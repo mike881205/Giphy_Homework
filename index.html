@@ -7,22 +7,23 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
         <title>Bands</title>
     </head>
 <body>
     <div class="container">
-        <h1>Band Search</h1>
-    
-        <!-- Bands will get dumped here -->
-        <div id="buttons-view"></div>
+        <h1>Band Gif Search</h1>
     
         <form id="band-form">
-            <label for="band-input">Add a Band</label>
+            <label for="band-input">Enter Band Name Here</label>
             <input type="text" id="band-input"><br>
     
             <!-- Button triggers new band to be added -->
-            <input id="add-band" type="submit" value="Add a Band">
+            <input id="add-band" type="submit" value="Add a Band to the List">
         </form>
+            <!-- Bands will get dumped here -->
+            <h3>Click on a band name to see some sweet gifs!</h3>
+            <div id="buttons-view"></div>
     </div>
     <div id="gifs-appear-here"></div>
 <script src="assets/javascript/javascript.js"></script> 

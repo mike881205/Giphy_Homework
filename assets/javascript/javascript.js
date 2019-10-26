@@ -48,23 +48,19 @@ $(document).on("click", ".band", function(){
   let bandData = $(this).attr("data-band");
 
   // Giphy API URL
-  let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + bandData + "&api_key=QZjqyqYS53kHPK9RXWncTF1pJXjuBPsy&limit=10"
+  let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + bandData + "&api_key=QZjqyqYS53kHPK9RXWncTF1pJXjuBPsy&limit=5"
 
   $.ajax({
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-
-      
-      console.log(response);
-      
+   
       let results = response.data
-
-      console.log(results)
 
       for (var i = 0; i < results.length; i++) {
 
         if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+
 
           // Creating a div for the gif
           let gifDiv = $("<div>");
