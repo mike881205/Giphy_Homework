@@ -44,11 +44,13 @@ renderButtons();
 
 // Function to retrieve and add gifs to the page
 $(document).on("click", ".band", function(){
+
+  $("#gifs-appear-here").empty();
   
   let bandData = $(this).attr("data-band");
 
   // Giphy API URL
-  let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + bandData + "&api_key=QZjqyqYS53kHPK9RXWncTF1pJXjuBPsy&limit=5"
+  let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + bandData + "&api_key=QZjqyqYS53kHPK9RXWncTF1pJXjuBPsy&limit=10"
 
   $.ajax({
       url: queryURL,
